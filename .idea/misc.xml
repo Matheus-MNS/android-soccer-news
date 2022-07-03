@@ -5,6 +5,9 @@
       <map>
         <entry key="..\:/Users/mathe/Documents/Repositories/android-soccer-news/app/src/main/res/layout/activity_main.xml" value="0.24210526315789474" />
         <entry key="..\:/Users/mathe/Documents/Repositories/android-soccer-news/app/src/main/res/layout/fragment_container.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/mathe/Documents/Repositories/android-soccer-news/app/src/main/res/layout/fragment_favorites.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/mathe/Documents/Repositories/android-soccer-news/app/src/main/res/layout/fragment_news.xml" value="0.35260416666666666" />
+        <entry key="..\:/Users/mathe/Documents/Repositories/android-soccer-news/app/src/main/res/menu/bottom_nav_menu.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
