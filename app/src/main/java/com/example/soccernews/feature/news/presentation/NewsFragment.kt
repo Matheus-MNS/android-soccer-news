@@ -5,16 +5,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.soccernews.databinding.FragmentFavoritesBinding
+import com.example.soccernews.R
+import com.example.soccernews.databinding.FragmentNewsBinding
 
-class FavoritesFragment : Fragment() {
 
-    private val binding by lazy { FragmentFavoritesBinding.inflate(layoutInflater) }
+class NewsFragment : Fragment() {
+
+    private val binding by lazy { FragmentNewsBinding.inflate(layoutInflater) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         return binding.root
     }
+
 }
