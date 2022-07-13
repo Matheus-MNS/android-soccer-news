@@ -20,7 +20,12 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", '"https://matheus-mns.github.io/soccer-news-api/"'
         }
+        debug{
+            buildConfigField "String", "BASE_URL", '"https://matheus-mns.github.io/soccer-news-api/"'
+        }
+
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -44,8 +49,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
     // Navigation library
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.4.2'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.0'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.0'
 
     // Test library
     testImplementation 'junit:junit:4.13.2'
@@ -56,5 +61,19 @@ dependencies {
     implementation 'io.insert-koin:koin-core:2.2.3'
     implementation 'io.insert-koin:koin-android:2.2.3'
     implementation 'io.insert-koin:koin-androidx-viewmodel:2.2.3'
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    // OkHttp
+    implementation'com.squareup.okhttp3:okhttp:4.6.0'
+    implementation'com.squareup.okhttp3:logging-interceptor:4.6.0'
+
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
 
 }

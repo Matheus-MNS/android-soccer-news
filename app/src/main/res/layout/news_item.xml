@@ -27,7 +27,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@tools:sample/avatars" />
+                app:srcCompat="@color/black" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/thumbnailTextView"
@@ -70,18 +70,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/default_margin"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
                 app:layout_constraintBottom_toBottomOf="@id/openLinkButton"
                 app:layout_constraintEnd_toStartOf="@id/shareImageView"
                 app:layout_constraintTop_toTopOf="@id/openLinkButton"
-                app:srcCompat="@drawable/ic_favorite"
-
-                />
+                app:srcCompat="@drawable/ic_favorite" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/shareImageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/default_margin"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
                 app:layout_constraintBottom_toBottomOf="@id/openLinkButton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/openLinkButton"
