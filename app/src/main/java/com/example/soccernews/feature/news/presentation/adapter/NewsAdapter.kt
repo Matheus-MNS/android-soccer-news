@@ -50,6 +50,13 @@ class NewsAdapter(private val list: List<NewsModel>) :
                     .load(newsItem.image)
                     .fit()
                     .into(thumbnailImageView)
+                
+                shareImageView.setOnClickListener {
+                    val intent = Intent(Intent.ACTION_SEND)
+                    intent.type = "text/plain"
+                    intent.putExtra(Intent.EXTRA_TEXT, newsItem.link)
+                    itemView.context.startActivity(Intent.createChooser(intent,"share"))
+                }
             }
         }
     }
