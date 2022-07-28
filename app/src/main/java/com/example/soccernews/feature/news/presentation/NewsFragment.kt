@@ -31,6 +31,7 @@ class NewsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         handleObserver()
+        swipeRefresh()
     }
 
     private fun handleObserver() {
@@ -44,6 +45,11 @@ class NewsFragment : Fragment() {
                 ::handleRecyclerView
             )
         )
+        viewModel.error.observe(
+            viewLifecycleOwner, Observer(
+                ::handleError
+            )
+        )
     }
 
     private fun handleRecyclerView(list: List<NewsModel>) {
@@ -53,6 +59,10 @@ class NewsFragment : Fragment() {
         newsAdapter.favoriteClickListener = {
             viewModel.onFavoriteButtonClicked(it)
         }
+    }
+
+    private fun handleError(errorCode: String) {
+        Toast.makeText(context, errorCode, Toast.LENGTH_LONG).show()
     }
 
     private fun isSavedOnFavoriteObserver() {
@@ -70,5 +80,15 @@ class NewsFragment : Fragment() {
             R.string.save_error
         }
         Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+    }
+
+    private fun swipeRefresh() {
+        with(binding) {
+            newsSwipeRefresh.setColorSchemeResources(R.color.purple_500)
+            newsSwipeRefresh.setOnRefreshListener {
+                viewModel.getNews()
+                newsSwipeRefresh.isRefreshing = false
+            }
+        }
     }
 }

@@ -20,6 +20,10 @@ class NewsViewModel(
     val newsList: MutableLiveData<List<NewsModel>> by lazy {
         MutableLiveData<List<NewsModel>>()
     }
+
+    val error: MutableLiveData<String> by lazy {
+        MutableLiveData<String>()
+    }
     val isSavedOnFavorites: MutableLiveData<Boolean> by lazy {
         MutableLiveData<Boolean>()
     }
@@ -29,16 +33,20 @@ class NewsViewModel(
         getNews()
     }
 
-    private fun getNews() {
+    fun getNews() {
         viewModelScope.launch {
             getNewsUseCase()
-                .catch { }
+                .catch {handleError(it) }
                 .collect { handleSuccess(it) }
         }
     }
 
     private fun handleSuccess(news: List<NewsModel>) {
         newsList.value = news
+    }
+
+    private fun handleError(throwable: Throwable) {
+        error.value = throwable.message
     }
 
     fun onFavoriteButtonClicked(news: NewsModel) {
