@@ -4,4 +4,6 @@
     <string name="title_news">News</string>
     <string name="title_favorites">Favorites</string>
     <string name="title_button_open_link">Abrir Link</string>
+    <string name="save_success">Notícia salva com sucesso</string>
+    <string name="save_error">Não foi possível salvar a notícia</string>
 </resources>

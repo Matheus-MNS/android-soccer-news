@@ -1,8 +1,18 @@
 package com.example.soccernews.feature.news.domain.model
 
+import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
+
+@Entity
+@Parcelize
 data class NewsModel(
-    var title: String,
-    var descriptor: String,
-    var image: String,
-    var link: String
-)
+    @PrimaryKey
+    val id: Int,
+    val title: String,
+    val descriptor: String,
+    val image: String,
+    val link: String,
+    var favorite: Boolean = false
+) : Parcelable

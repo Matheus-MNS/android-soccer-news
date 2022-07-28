@@ -1,4 +1,4 @@
-package com.example.soccernews.data.remote
+package com.example.soccernews.common.data.remote
 
 
 import com.example.soccernews.BuildConfig

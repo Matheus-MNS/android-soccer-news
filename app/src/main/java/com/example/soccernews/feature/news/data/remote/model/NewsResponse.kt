@@ -3,6 +3,8 @@ package com.example.soccernews.feature.news.data.remote.model
 import com.google.gson.annotations.SerializedName
 
 data class NewsResponse(
+    @SerializedName("id")
+    val id: Int?,
     @SerializedName("title")
     val title: String?,
     @SerializedName("description")

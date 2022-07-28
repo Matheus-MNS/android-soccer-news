@@ -1,8 +1,8 @@
-package com.example.soccernews.data.remote.di
+package com.example.soccernews.common.data.remote.di
 
 import com.example.soccernews.BuildConfig
-import com.example.soccernews.data.remote.WebServiceFactory.provideOkHttpClient
-import com.example.soccernews.data.remote.WebServiceFactory.provideRetrofit
+import com.example.soccernews.common.data.remote.WebServiceFactory.provideOkHttpClient
+import com.example.soccernews.common.data.remote.WebServiceFactory.provideRetrofit
 import org.koin.dsl.module
 
 val dataRemoteModule = module {

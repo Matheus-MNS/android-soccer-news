@@ -14,10 +14,11 @@ class NewsRemoteDataSource(private val service: NewsService) {
     private fun List<NewsResponse>.toDomain(): List<NewsModel> =
         this.map {
             NewsModel(
+                id = it.id ?: 0,
                 title = it.title.orEmpty(),
                 descriptor = it.descriptor.orEmpty(),
                 image = it.image.orEmpty(),
-                link = it.link.orEmpty()
+                link = it.link.orEmpty(),
             )
         }
 }

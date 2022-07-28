@@ -6,4 +6,7 @@ import kotlinx.coroutines.flow.Flow
 interface NewsRepository {
 
     fun getNews(): Flow<List<NewsModel>>
+
+    fun insertNews(newsModel: NewsModel): Flow<Unit>
+
 }
