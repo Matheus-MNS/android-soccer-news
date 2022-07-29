@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.soccernews.R
-import com.example.soccernews.common.utils.AdapterItemWithParameterClickListener
-import com.example.soccernews.common.utils.DefaultDiffCallback
+import com.example.soccernews.common.utils.adapter.AdapterItemWithParameterClickListener
+import com.example.soccernews.common.utils.adapter.DefaultDiffCallback
 import com.example.soccernews.databinding.NewsItemBinding
 import com.example.soccernews.feature.news.domain.model.NewsModel
 import com.squareup.picasso.Picasso

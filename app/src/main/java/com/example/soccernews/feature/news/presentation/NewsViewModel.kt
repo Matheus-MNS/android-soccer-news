@@ -3,13 +3,11 @@ package com.example.soccernews.feature.news.presentation
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.soccernews.common.utils.SingleLiveEvent
 import com.example.soccernews.feature.news.domain.model.NewsModel
 import com.example.soccernews.feature.news.domain.use_case.GetNewsUseCase
 import com.example.soccernews.feature.news.domain.use_case.SaveNewsOnFavoritesUseCase
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 
 class NewsViewModel(
@@ -17,17 +15,11 @@ class NewsViewModel(
     private val saveNewsOnFavoritesUseCase: SaveNewsOnFavoritesUseCase
 ) : ViewModel() {
 
-    val newsList: MutableLiveData<List<NewsModel>> by lazy {
-        MutableLiveData<List<NewsModel>>()
-    }
+    val viewState = MutableLiveData<NewsViewState>()
+    val viewAction = SingleLiveEvent<NewsViewAction>()
 
-    val error: MutableLiveData<String> by lazy {
-        MutableLiveData<String>()
-    }
-    val isSavedOnFavorites: MutableLiveData<Boolean> by lazy {
-        MutableLiveData<Boolean>()
-    }
 
+    var isSavedOnFavorites: Boolean = false
 
     init {
         getNews()
@@ -36,17 +28,13 @@ class NewsViewModel(
     fun getNews() {
         viewModelScope.launch {
             getNewsUseCase()
-                .catch {handleError(it) }
-                .collect { handleSuccess(it) }
+                .catch {
+                    viewState.value = NewsViewState.Error(it.message)
+                }
+                .collect {
+                    viewState.value = NewsViewState.Success(it)
+                }
         }
-    }
-
-    private fun handleSuccess(news: List<NewsModel>) {
-        newsList.value = news
-    }
-
-    private fun handleError(throwable: Throwable) {
-        error.value = throwable.message
     }
 
     fun onFavoriteButtonClicked(news: NewsModel) {
@@ -56,8 +44,13 @@ class NewsViewModel(
     private fun saveNewsOnFavorite(news: NewsModel) {
         viewModelScope.launch {
             saveNewsOnFavoritesUseCase(news)
-                .catch { isSavedOnFavorites.value = false }
-                .collect { isSavedOnFavorites.value = true }
+                .catch {
+                    viewAction.value = NewsViewAction.ShowToast("Deu Ruim")
+                }
+                .collect {
+                    viewAction.value = NewsViewAction.ShowToast("Deu BOM")
+                }
         }
     }
+
 }

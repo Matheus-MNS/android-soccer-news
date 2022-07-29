@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import com.example.soccernews.R
 import com.example.soccernews.databinding.FragmentNewsBinding
 import com.example.soccernews.feature.news.domain.model.NewsModel
@@ -30,27 +29,30 @@ class NewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        handleObserver()
+        observeAction()
+        observeState()
         swipeRefresh()
     }
 
-    private fun handleObserver() {
-        newsListObserver()
-        isSavedOnFavoriteObserver()
+    private fun observeAction() {
+        viewModel.viewAction.observe(viewLifecycleOwner) { action ->
+            if (action is NewsViewAction.ShowToast) {
+                Toast.makeText(context, action.message, Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
-    private fun newsListObserver() {
-        viewModel.newsList.observe(
-            viewLifecycleOwner, Observer(
-                ::handleRecyclerView
-            )
-        )
-        viewModel.error.observe(
-            viewLifecycleOwner, Observer(
-                ::handleError
-            )
-        )
+    private fun observeState() {
+        viewModel.viewState.observe(viewLifecycleOwner) { state ->
+            when (state) {
+                is NewsViewState.Success ->
+                    handleRecyclerView(state.newsList)
+                is NewsViewState.Error ->
+                    handleError(state.message)
+            }
+        }
     }
+
 
     private fun handleRecyclerView(list: List<NewsModel>) {
         val newsAdapter = NewsAdapter()
@@ -61,16 +63,8 @@ class NewsFragment : Fragment() {
         }
     }
 
-    private fun handleError(errorCode: String) {
+    private fun handleError(errorCode: String?) {
         Toast.makeText(context, errorCode, Toast.LENGTH_LONG).show()
-    }
-
-    private fun isSavedOnFavoriteObserver() {
-        viewModel.isSavedOnFavorites.observe(
-            viewLifecycleOwner, Observer(
-                ::showFavoriteToast
-            )
-        )
     }
 
     private fun showFavoriteToast(isSavedOnFavorites: Boolean) {

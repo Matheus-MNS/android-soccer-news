@@ -1,4 +1,4 @@
-package com.example.soccernews.common.utils
+package com.example.soccernews.common.utils.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 
