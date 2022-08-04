@@ -67,15 +67,6 @@ class NewsFragment : Fragment() {
         Toast.makeText(context, errorCode, Toast.LENGTH_LONG).show()
     }
 
-    private fun showFavoriteToast(isSavedOnFavorites: Boolean) {
-        val message = if (isSavedOnFavorites) {
-            R.string.save_success
-        } else {
-            R.string.save_error
-        }
-        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
-    }
-
     private fun swipeRefresh() {
         with(binding) {
             newsSwipeRefresh.setColorSchemeResources(R.color.purple_500)

@@ -6,4 +6,5 @@
     <string name="title_button_open_link">Abrir Link</string>
     <string name="save_success">Notícia salva com sucesso</string>
     <string name="save_error">Não foi possível salvar a notícia</string>
+    <string name="share_news">Compartilhar</string>
 </resources>

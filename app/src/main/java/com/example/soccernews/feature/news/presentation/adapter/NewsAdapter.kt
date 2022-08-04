@@ -52,17 +52,23 @@ class NewsAdapter : ListAdapter<NewsModel, NewsAdapter.ViewHolder>(
                     val intent = Intent(Intent.ACTION_SEND)
                     intent.type = "text/plain"
                     intent.putExtra(Intent.EXTRA_TEXT, newsItem.link)
-                    itemView.context.startActivity(Intent.createChooser(intent, "share"))
+                    itemView.context.startActivity(
+                        Intent.createChooser(
+                            intent,
+                            R.string.share_news.toString()
+                        )
+                    )
                 }
                 favoritesImageView.setOnClickListener {
                     newsItem.favorite = !newsItem.favorite
                     favoriteClickListener(newsItem)
+                    val favoriteColor =
+                        if (newsItem.favorite) R.color.favorite_active else R.color.favorite_inactive
+                    favoritesImageView.setColorFilter(
+                        itemView.context.getColor(favoriteColor)
+                    )
                 }
-                val favoriteColor =
-                    if (newsItem.favorite) R.color.favorite_active else R.color.favorite_inactive
-                favoritesImageView.setColorFilter(
-                    itemView.context.getColor(favoriteColor)
-                )
+
 
             }
         }
