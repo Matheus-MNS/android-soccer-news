@@ -20,7 +20,8 @@ val newsModule = module {
             ),
             saveNewsOnFavoritesUseCase = SaveNewsOnFavoritesUseCase(
                 repository = get()
-            )
+            ),
+            application = get()
         )
     }
 

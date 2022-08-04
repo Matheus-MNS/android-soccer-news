@@ -7,11 +7,11 @@
     <fragment
         android:id="@+id/navigation_news"
         android:name="com.example.soccernews.feature.news.presentation.NewsFragment"
-        android:label="fragment_news"
+        android:label="@string/title_news"
         tools:layout="@layout/fragment_news" />
     <fragment
         android:id="@+id/navigation_favorites"
         android:name="com.example.soccernews.feature.favorites.presentantion.FavoritesFragment"
-        android:label="fragment_favorites"
+        android:label="@string/title_favorites"
         tools:layout="@layout/fragment_favorites" />
 </navigation>

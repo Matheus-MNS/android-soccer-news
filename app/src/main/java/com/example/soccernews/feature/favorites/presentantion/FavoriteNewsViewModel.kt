@@ -19,6 +19,8 @@ class FavoriteNewsViewModel(
         MutableLiveData<List<NewsModel>>()
     }
 
+    val viewState = MutableLiveData<FavoriteNewsViewState>()
+
     init {
         getFavoriteNews()
     }
@@ -27,7 +29,7 @@ class FavoriteNewsViewModel(
         viewModelScope.launch {
             favoritesUseCase()
                 .catch { }
-                .collect { newsFavorite.value = it }
+                .collect { viewState.value = FavoriteNewsViewState.FavoriteList(it) }
         }
     }
 }

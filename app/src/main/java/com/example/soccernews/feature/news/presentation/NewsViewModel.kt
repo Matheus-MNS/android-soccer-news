@@ -1,8 +1,10 @@
 package com.example.soccernews.feature.news.presentation
 
+import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.soccernews.R
 import com.example.soccernews.common.utils.SingleLiveEvent
 import com.example.soccernews.feature.news.domain.model.NewsModel
 import com.example.soccernews.feature.news.domain.use_case.GetNewsUseCase
@@ -12,14 +14,12 @@ import kotlinx.coroutines.launch
 
 class NewsViewModel(
     private val getNewsUseCase: GetNewsUseCase,
-    private val saveNewsOnFavoritesUseCase: SaveNewsOnFavoritesUseCase
+    private val saveNewsOnFavoritesUseCase: SaveNewsOnFavoritesUseCase,
+    private val application: Application
 ) : ViewModel() {
 
     val viewState = MutableLiveData<NewsViewState>()
     val viewAction = SingleLiveEvent<NewsViewAction>()
-
-
-    var isSavedOnFavorites: Boolean = false
 
     init {
         getNews()
@@ -45,10 +45,12 @@ class NewsViewModel(
         viewModelScope.launch {
             saveNewsOnFavoritesUseCase(news)
                 .catch {
-                    viewAction.value = NewsViewAction.ShowToast("Deu Ruim")
+                    viewAction.value =
+                        NewsViewAction.ShowToast(application.getString(R.string.save_error))
                 }
                 .collect {
-                    viewAction.value = NewsViewAction.ShowToast("Deu BOM")
+                    viewAction.value =
+                        NewsViewAction.ShowToast(application.getString(R.string.save_success))
                 }
         }
     }
